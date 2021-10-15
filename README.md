@@ -14,7 +14,7 @@ Pytorch 1.2<br>
 Pandas<br>
 Numpy<br>
 
-## Training
+## Getting started
 
 Fairness regularizers and data pre-processing are given in the utils.py.
 
