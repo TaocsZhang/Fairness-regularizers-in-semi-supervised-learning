@@ -71,75 +71,7 @@ def load_data(path="../data/cora/", dataset="cora"):
     print("Data Loading Done.  " + str(time.time()-start_time) + "s.")
 
     return adj, features, labels, idx_train, idx_val, idx_test
-'''
-def load_sampled_data(dataset="health", semi=0):
-    """
-    Load custom sampled data
-    """
-    def _solve_w(x, sigma=1):
-        dist = squareform(pdist(x[:, 1:], metric='euclidean'))
-        f = np.exp(- np.power(dist, 2) / (sigma ** 2))
-        return f
 
-    start_time = time.time()
-    if dataset == "health":
-        num_val = 4604
-        num_test = 4604
-        num_train_label = 10000
-
-        if semi:
-            num_train_unlabel = 10000
-            pickle_name = "sampled_bank_dataset_semi.pl"
-
-        else:
-            num_train_unlabel = 0
-            pickle_name = "sampled_bank_dataset_supervised.pl"
-
-        total_data = num_train_unlabel + num_train_label + num_val + num_test
-
-    else:
-        num_val = 4604
-        num_test = 4604
-        num_train_label = 10000
-        num_train_unlabel = 10000
-
-        print("Error. Unexpected dataset")
-
-    if os.path.isfile(pickle_name):
-        print("Loading from pickle.")
-        pk = pickle.load(open(pickle_name, "rb"))
-    else:
-        print("Preprocessing data.")
-        pk = {}
-        dataset = pd.read_pickle(open(os.path.join(sys.path[0], "sampled_bank_dataset.csv"), "rb"))
-        dataset = dataset[:total_data]
-
-        x = np.array(dataset.drop(['labels', ], axis=1), dtype=float)
-        sens_x = np.array(dataset["age"], dtype=float)
-        y = np.array(dataset['labels'], dtype=float)
-
-        """Load citation network dataset (cora only for now)"""
-
-        # build graph
-        adj = sp.coo_matrix(_solve_w(x))
-
-        # build symmetric adjacency matrix
-
-        adj = adj + adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
-
-        #features = normalize(x)
-        features = (x)
-        adj = normalize(adj + sp.eye(adj.shape[0]))
-
-        idx_data = range(0, len(x))
-        idx_train_label = idx_data[:num_train_label]
-        idx_train_unlabel = idx_data[num_train_label:num_train_label+num_train_unlabel]
-        idx_val = idx_data[num_train_label+num_train_unlabel:num_train_label+num_train_unlabel+num_val]
-        idx_test = idx_data[-num_test]
-        
-        return pk["adj"], pk["features"], pk["sens_features"], pk["labels"], pk["idx_train_label"], pk["idx_train_unlabel"], pk["idx_val"], pk["idx_test"]
-
-'''
 def load_sampled_data():
     """
     Load custom sampled data
@@ -220,19 +152,6 @@ def load_sampled_data():
             num_train_unlabel = 400 # int(0.5 * len(x))
             num_val = 1
             num_test = 280  # int(0.3 * len(x))
-
-
-
-
-
-
-        """Load citation network dataset (cora only for now)"""
-
-        # build graph
-
-
-
-        # build symmetric adjacency matrix
 
         adj = adj + adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
 
