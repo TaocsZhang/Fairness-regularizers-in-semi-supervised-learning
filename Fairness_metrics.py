@@ -106,9 +106,6 @@ class Fairness_metrics(object):
         n_N_p = len(FP_p) + len(TN_p) # the number of negative labels in the protected group
         n_N_up = len(FP_up) + len(TN_up) #the number of negative labels in the unprotected group
         
-
-        #print(len(TP_up),len(TN_up),len(FP_up),len(FN_up),len(TP_p),len(TN_p),len(FP_p),len(FN_p))
-        #print(len(dataset))
         n = len(TP_up)+len(TN_up)+len(FP_up)+len(FN_up)+len(TP_p)+len(TN_p)+len(FP_p)+len(FN_p)
         if n_P_up == 0 or n_P_p == 0 or n_N_p == 0 or n_N_up==0:
             equal_oppo = 100
