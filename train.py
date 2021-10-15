@@ -40,12 +40,12 @@ parser.add_argument('--fair_metric', type=int, default=1,
                     help='fairness metric.(1 for demographic_parity')
 parser.add_argument('--alpha', type=float, default=0.5,
                     help='fare learning parameter.')
-#parser.add_argument('--training_mode', type=float, default=1,
- #                   help='1 for semi-supervised learning.')
+parser.add_argument('--training_mode', type=float, default=1,
+                    help='1 for semi-supervised learning.')
 parser.add_argument('--num_unlabel', type=float, default=400,
                    help='the number of unlabeled data.')
-#parser.add_argument('--num_labeled', type=float, default=1000,
-#                    help='the number of labeled data.')
+parser.add_argument('--num_labeled', type=float, default=1000,
+                    help='the number of labeled data.')
 
 args = parser.parse_args()
 print2file(str(args), args.logDir, True)
@@ -65,16 +65,8 @@ print('features',features)
 print(features.size())
 #idx_train = idx_train
 
-#print(adj[idx_train])
-#print(sens_features)
-#print(labels)
-#print(adj.size())
-print('idx_train_label',idx_train_label)
-#print('idx_train_unlabel',idx_train_unlabel)
-print('idx_test',idx_test)
 num_unlabel = int(args.num_unlabel)
 idx_train_unlabel = idx_train_unlabel[:num_unlabel]
-print('num_unlabeled',idx_train_unlabel.size())
 idx_train = torch.cat((idx_train_label,idx_train_unlabel),0)
 
 
@@ -109,8 +101,8 @@ def train(epoch, idx_train):
     output = model(features, adj)
     #print('output',output)
 
-    #if args.training_mode == 1:
-    #    idx_train = idx_train[:args.num_labeled]
+    if args.training_mode == 1:
+        idx_train = idx_train[:args.num_labeled]
 
 
     if args.fare == 1:
@@ -176,10 +168,6 @@ def test():
     #       "accuracy= {:.4f}".format(acc_test.item()))
     return predicted[idx_test], acc_test
 
-
-
-
-
 def calculate_loss(output, sens_features, labels, alpha=10):
     """
     calculate 
@@ -193,9 +181,6 @@ def calculate_loss(output, sens_features, labels, alpha=10):
     # p_i
     pos_pi = output_exp[pos_idx].gather(-1, labels[pos_idx].unsqueeze(1)).squeeze(1)
     neg_pi = output_exp[neg_idx].gather(-1, labels[neg_idx].unsqueeze(1)).squeeze(1)
-
-    #print('pos_pi',pos_pi,pos_pi.size())
-    #print('neg_pi',neg_pi,neg_pi.size())
 
     pos_dp = torch.sum(pos_pi) / len(pos_idx)
     neg_dp = torch.sum(neg_pi) / len(neg_idx)
