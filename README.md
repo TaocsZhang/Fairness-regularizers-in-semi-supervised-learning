@@ -14,11 +14,11 @@ Pytorch 1.2<br>
 Pandas<br>
 Numpy<br>
 
-## Procedures
+## Training
 
 Fairness regularizers and data pre-processing are given in the utils.py.
 
-Graph neural network is given in the model.py and layer.py.
+Graph neural network is defined in the model.py and layer.py.
 
 The training process is in the train.py. The following is an example to execute train.py.
 
