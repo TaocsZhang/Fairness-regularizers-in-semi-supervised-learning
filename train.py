@@ -60,11 +60,7 @@ if args.cuda:
 # adj, features, labels, idx_train, idx_val, idx_test = load_data()
 adj, features, sens_features, labels, idx_train_label, idx_train_unlabel, idx_val, idx_test = load_sampled_data()
 
-print('adj',adj.size())
-print('features',features)
-print(features.size())
 #idx_train = idx_train
-
 num_unlabel = int(args.num_unlabel)
 idx_train_unlabel = idx_train_unlabel[:num_unlabel]
 idx_train = torch.cat((idx_train_label,idx_train_unlabel),0)
@@ -212,7 +208,7 @@ for epoch in range(args.epochs):
 print("Optimization Finished!")
 print("Total time elapsed: {:.4f}s".format(time.time() - t_total))
 
-    # Testing
+# Testing
 print("Start Testing.")
 predicted_labels, acc_test = test()
 print("End. So far so god...")
