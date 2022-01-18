@@ -1,4 +1,4 @@
-# Fairness-regularizers-in-semi-supervised-learning
+# Fairness in-Graph-based-Semi-supervised-Learning
 
 Authors: **Tao Zhang**, Tianqing Zhu, Kun Gao, Wanlei Zhou
 
