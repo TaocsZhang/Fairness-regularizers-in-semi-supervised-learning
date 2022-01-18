@@ -41,6 +41,8 @@ Graph neural network is defined in the model.py and layer.py.
 
 The training process is in the train.py. 
 
+Fairness metrics.py is used to evaluate discrimination level with demographic parity and equal opportunity.
+
 The following is an example to execute train.py.
 
 python train.py --lr=0.005 --fare=1 --fair_metric=1 --alpha=0.5 --num_unlabel=400 --num_labeled=1000 
@@ -56,7 +58,5 @@ Health dataset: https://foreverdata.org/1015/index.html
 Titanic dataset: ttps://www.kaggle.com/c/titanic/data
 
 ## Evaluation 
-Fairness metrics.py is used to evaluate discrimination level with demographic parity and equal opportunity.
-
 From these experiments, we can obtain some conclusions. 1) The proposed framework can make use of unlabeled data to achieve a better trade-off between accuracy and discrimination. 2) Under the fairness metric of disparate impact, the fairness constraint on mixed labeled and unlabeled
 data generally has the best trade-off between accuracy and discrimination. Under the fairness metric of disparate mistreatment, the fairness constraint on labeled data is used to achieve the trade-off between accuracy and discrimination. 3) More unlabeled data generally helps to make a better compromise between accuracy and discrimination. 4) Model choice can affect the trade-off between accuracy and discrimination. Our experiments show that SVM is more friendly to achieve a better trade-off than LR.
