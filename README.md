@@ -1,4 +1,4 @@
-# Fairness in-Graph-based-Semi-supervised-Learning
+# Fairness in Graph-based Semi-supervised Learning
 
 Authors: **Tao Zhang**, Tianqing Zhu, Kun Gao, Wanlei Zhou
 
@@ -22,16 +22,16 @@ Forth, we theoretically analyze the sources of discrimina-tion in SSL to explain
 
 
 ## Method 1
-
+Our first approach,  fair  semi-supervised  margin  classifiers  (FSMC),  isformulated  as  an  optimization  problem,  where  the  objectivefunction  includes  a  loss  for  both  the  classifier  and  label propagation,  and  fairness  constraints  over  labeled  and  unlabeled  data.  Classification  loss  is  to  optimize  the  accuracy  oftraining result; label propagation loss is to optimize the label predictions on unlabeled data; the fairness constraint is to lead optimization towards to a fairness direction.  In  this  way,  labeled  and unlabeled data are used to achieve a better trade-off between accuracy and fairness.
 
 ## Method 2
-Our approach,  fair graph neural networks (FGNN), is built with GNNs, where the loss function includes classification loss and fairness loss. Classification loss optimizes the classification accuracy over all labeled data, and fairness loss enforces fairness over labeled data and unlabeled data.  GNN  models  combine  graph  structures  and  features, and  our  method  allows  GNN  models  to  distribute  gradient information from the classification loss and fairness loss. Thus, fair representations of nodes with labeled and unlabeled datacan be learned to achieve the ideal trade-off between accuracy and fairness.
+Our second approach,  fair graph neural networks (FGNN), is built with GNNs, where the loss function includes classification loss and fairness loss. Classification loss optimizes the classification accuracy over all labeled data, and fairness loss enforces fairness over labeled data and unlabeled data.  GNN  models  combine  graph  structures  and  features, and  our  method  allows  GNN  models  to  distribute  gradient information from the classification loss and fairness loss. Thus, fair representations of nodes with labeled and unlabeled datacan be learned to achieve the ideal trade-off between accuracy and fairness.
 
 ## Requirements
 Python 3.6<br>
 Pytorch 1.2<br>
-Pandas<br>
-Numpy<br>
+Pandas 1.2.0<br>
+Numpy 1.18.0<br>
 
 ## Getting started
 
@@ -39,7 +39,9 @@ Fairness regularizers and data pre-processing are given in the utils.py.
 
 Graph neural network is defined in the model.py and layer.py.
 
-The training process is in the train.py. The following is an example to execute train.py.
+The training process is in the train.py. 
+
+The following is an example to execute train.py.
 
 python train.py --lr=0.005 --fare=1 --fair_metric=1 --alpha=0.5 --num_unlabel=400 --num_labeled=1000 
 
@@ -55,3 +57,6 @@ Titanic dataset: ttps://www.kaggle.com/c/titanic/data
 
 ## Evaluation 
 Fairness metrics.py is used to evaluate discrimination level with demographic parity and equal opportunity.
+
+From these experiments, we can obtain some conclusions. 1) The proposed framework can make use of unlabeled data to achieve a better trade-off between accuracy and discrimination. 2) Under the fairness metric of disparate impact, the fairness constraint on mixed labeled and unlabeled
+data generally has the best trade-off between accuracy and discrimination. Under the fairness metric of disparate mistreatment, the fairness constraint on labeled data is used to achieve the trade-off between accuracy and discrimination. 3) More unlabeled data generally helps to make a better compromise between accuracy and discrimination. 4) Model choice can affect the trade-off between accuracy and discrimination. Our experiments show that SVM is more friendly to achieve a better trade-off than LR.
