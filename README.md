@@ -55,7 +55,7 @@ Bank dataset: https://archive.ics.uci.edu/ml/datasets/bank+mar
 
 Health dataset: https://foreverdata.org/1015/index.html
 
-Titanic dataset: ttps://www.kaggle.com/c/titanic/data
+Titanic dataset: https://www.kaggle.com/c/titanic/data
 
 ## Evaluation 
 From these experiments, we can obtain some conclusions. 1) The proposed framework can make use of unlabeled data to achieve a better trade-off between accuracy and discrimination. 2) Under the fairness metric of disparate impact, the fairness constraint on mixed labeled and unlabeled
