@@ -2,7 +2,7 @@
 
 Authors: **Tao Zhang**, Tianqing Zhu, Kun Gao, Wanlei Zhou
 
-This is part of code for the paper 'Fairness in Graph-based Semi-supervised Learning'. 
+This is part of code for my paper 'Fairness in Graph-based Semi-supervised Learning'. 
 
 
 ## Introduction
